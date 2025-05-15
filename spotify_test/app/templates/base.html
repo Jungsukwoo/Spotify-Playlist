@@ -1,0 +1,36 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>For Money</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <!-- 좌측 로고 -->
+            <div class="nav-left">
+                <a href="{{ url_for('main_views.main_page') }}" class="logo">For Money</a>
+            </div>
+
+            <!-- 중앙 메뉴 -->
+            <ul class="nav-center">
+                <li><a href="{{ url_for('main_views.main_page') }}">홈</a></li>
+                <li><a href="#">플레이리스트</a></li>
+                <li><a href="#">아티스트 찾기</a></li>
+                <li><a href="{{ url_for('extract_views.extract_audio') }}">음원 추출</a></li>
+            </ul>
+
+            <!-- 우측 햄버거 아이콘 -->
+            <div class="nav-right">
+                <span class="menu-icon">&#9776;</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

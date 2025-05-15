@@ -1,0 +1,6 @@
+{
+  "domain_selectors": {
+    "n.news.naver.com": "#dic_area"
+  },
+  "fallback_selectors": []
+}

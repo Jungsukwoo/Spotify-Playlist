@@ -1,4 +1,4 @@
-# extract_mp3/youtube_to_mp3.py
+# 유튜브에서 mp3로 음원 뽑기
 import os
 from pytubefix import YouTube
 

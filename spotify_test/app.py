@@ -1,24 +1,18 @@
-# app.py
-import os
-from flask import Flask, request, render_template
+from flask import Blueprint, render_template, request
 from extract_mp3.youtube_to_mp3 import download_audio_from_youtube
 
-app = Flask(__name__)
+app_views = Blueprint('app_views', __name__)
 
-@app.route("/", methods=["GET", "POST"])
-def index():
+@app_views.route("/")
+def main_page():
+    return render_template("MainPage.html")
+
+@app_views.route("/extract", methods=["GET", "POST"])
+def extract_audio():
     result = None
     if request.method == "POST":
         url = request.form.get("yt_url")
-        print(f"요청된 URL: {url}")
         if url:
             filename = download_audio_from_youtube(url)
-            if filename:
-                result = f"다운로드 완료: {filename}"
-                
-            else:
-                result = "다운로드 실패"
+            result = f"다운로드 완료: {filename}" if filename else "다운로드 실패"
     return render_template("index.html", result=result)
-
-if __name__ == "__main__":
-    app.run(debug=True)

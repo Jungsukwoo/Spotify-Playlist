@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="extract-section">
+    <h2>유튜브 음원 추출기</h2>
+
+    <form method="POST" class="search-form">
+        <input type="text" name="yt_url" placeholder="유튜브 URL 입력">
+        <button type="submit">검색</button>
+    </form>
+
+    {% if video_url %}
+    <div class="result-box">
+        {% if thumbnail_url %}
+        <img src="{{ thumbnail_url }}" alt="thumbnail" class="thumbnail-image">
+        {% endif %}
+
+        {% if title %}
+        <p style="font-weight: bold; margin-bottom: 10px;">{{ title }}</p>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('extract_views.download') }}">
+            <input type="hidden" name="yt_url" value="{{ video_url }}">
+            <button type="submit" class="download-button">다운로드</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+<!-- ✅ Alert 영역 -->
+<div id="alertBox" class="alert" style="display: none;"></div>
+
+{% if alert_message %}
+<script>
+    const alertBox = document.getElementById("alertBox");
+    alertBox.innerText = "{{ alert_message }}";
+    alertBox.style.display = "block";
+    setTimeout(() => {
+        alertBox.style.display = "none";
+    }, 3000);
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,13 @@
+<!-- templates/MainPage.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="#" method="get" class="search-form">
+        <input type="text" placeholder="곡명을 입력하세요..." name="query">
+        <button type="submit">search</button>
+    </form>
+
+    <div class="result-box">
+        <p><strong>rockstar</strong>라는 곡 전부 검색 나오게</p>
+    </div>
+{% endblock %}
