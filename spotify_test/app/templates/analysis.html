@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="extract-section">
+    <h2>곡 분석</h2>
+    <form method="POST" class="search-form">
+        <input type="text" name="track_query" placeholder="곡명을 입력하세요..." />
+        <button type="submit">search</button>
+    </form>
+
+    {% if error %}
+    <div class="alert-box">{{ error }}</div>
+    {% endif %}
+
+    {% if track_info %}
+    <div class="result-box">
+        <p><strong>🎵 제목:</strong> {{ track_info.title }}</p>
+        <p><strong>🎤 아티스트:</strong> {{ track_info.artist }}</p>
+        <p><strong>💿 앨범:</strong> {{ track_info.album }}</p>
+        <p><strong>📅 발매일:</strong> {{ track_info.release_date }}</p>
+        <p><strong>⚠️ Explicit:</strong> {{ "Yes" if track_info.explicit else "No" }}</p>
+        <hr />
+        <p><strong>🎧 BPM:</strong> {{ audio_features.bpm }}</p>
+        <p><strong>🎼 Key:</strong> {{ audio_features.key }}</p>
+        <p><strong>🧩 Camelot:</strong> {{ audio_features.camelot }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,13 +1,38 @@
-<!-- templates/MainPage.html -->
 {% extends "base.html" %}
-
 {% block content %}
-    <form action="#" method="get" class="search-form">
-        <input type="text" placeholder="곡명을 입력하세요..." name="query">
-        <button type="submit">search</button>
-    </form>
+<div class="extract-section">
+    <h2>🎵 나만의 플레이리스트 만들기</h2>
+    <form method="POST" class="recommendation-form">
+        <!-- 기준 트랙 -->
+        <div class="form-group">
+            <label for="seed_track">🎧 기준 트랙</label>
+            <input type="text" id="seed_track" name="seed_track" placeholder="예: rockstar">
+        </div>
 
-    <div class="result-box">
-        <p><strong>rockstar</strong>라는 곡 전부 검색 나오게</p>
-    </div>
+        <!-- 기준 아티스트 -->
+        <div class="form-group">
+            <label for="seed_artist">👤 기준 아티스트</label>
+            <input type="text" id="seed_artist" name="seed_artist" placeholder="예: Charlie Puth">
+        </div>
+
+        <!-- 장르 선택 -->
+        <div class="form-group">
+            <label>🎼 장르 선택</label>
+            <div class="genre-checkboxes">
+                {% for genre in genres[:10] %}
+                    <label><input type="checkbox" name="genres" value="{{ genre }}"> {{ genre }}</label>
+                {% endfor %}
+
+                <div id="more-genres" style="display: none;">
+                    {% for genre in genres[10:] %}
+                        <label><input type="checkbox" name="genres" value="{{ genre }}"> {{ genre }}</label>
+                    {% endfor %}
+                </div>
+            </div>
+            <button type="button" id="toggle-genre-btn">더보기</button>
+        </div>
+
+        <button type="submit" class="download-button">플레이리스트 생성</button>
+    </form>
+</div>
 {% endblock %}
